@@ -18,32 +18,47 @@
 
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 	<?php echo $this->Html->charset(); ?>
 	<title><?php echo $title_for_layout; ?></title>
 	<?php
 		echo $this->Html->meta('icon');
 
-		echo $this->Html->css('cake.generic');
+		echo $this->Html->css('/bootstrap/css/bootstrap.min.css');
+		echo $this->Html->css('default');
+
 
 		echo $this->fetch('meta');
 		echo $this->fetch('css');
 		echo $this->fetch('script');
 	?>
 </head>
-<body>
-	<div id="container">
-		
-		<br />
+<body class="<?php echo $this->request->controller; ?>">
+	<div class="container">
 
-		<div id="content">
+		<div class="navbar">
+			<div class="navbar-inner">
+				<?php echo $this->element('menu') ?>
+			</div>
+		</div>
 
-			<?php echo $this->Session->flash(); ?>
+		<div class="clearfix">
+			<div class="row">
+				<div class="span3">
+					asfhjhas
+				</div>
+				<div class="span9">
+					<?php //if($this->Session->check()) {
+						echo $this->Session->flash();
+					//} ?>
+					<?php echo $this->fetch('content'); ?>
+				</div>
 
-			<?php echo $this->fetch('content'); ?>
+			</div>
 		</div>
 	</div>
-	<?php echo $this->element('sql_dump'); ?>
+	
+	<script src="http://code.jquery.com/jquery-latest.js"></script>
 </body>
 </html>
