@@ -17,4 +17,6 @@
  */
 ?>
 
+<h2>Home</h2>
+
 This is the home page

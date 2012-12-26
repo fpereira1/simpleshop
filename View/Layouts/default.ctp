@@ -37,28 +37,37 @@
 <body class="<?php echo $this->request->controller; ?>">
 	<div class="container">
 
+		<div class="row"><!-- 
+			<div class="span2">
+				<img src="http://cdn1.iconfinder.com/data/icons/womens_day_icons/128/handbag.png" alt="">
+			</div> -->
+			<div class="span12">
+				<h1><?php echo $this->Html->link(Configure::read('Shop.name'), '/'); ?></h1>
+			</div>
+		</div>
+
 		<div class="navbar">
 			<div class="navbar-inner">
 				<?php echo $this->element('menu') ?>
 			</div>
 		</div>
-
+		
 		<div class="clearfix">
 			<div class="row">
 				<div class="span3">
-					asfhjhas
+					&nbsp;
 				</div>
 				<div class="span9">
-					<?php //if($this->Session->check()) {
-						echo $this->Session->flash();
-					//} ?>
+					<?php echo $this->Session->flash(); ?>
 					<?php echo $this->fetch('content'); ?>
 				</div>
 
 			</div>
 		</div>
 	</div>
+
+	<p>&nbsp;</p>
 	
-	<script src="http://code.jquery.com/jquery-latest.js"></script>
+	<script src="//code.jquery.com/jquery-latest.js"></script>
 </body>
 </html>

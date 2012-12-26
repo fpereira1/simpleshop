@@ -1,12 +1,13 @@
 <ul class="nav">
 	<?php
 		$menu = array(
-			'/', 'products', 'cart', 'about'
+			'products', 'cart'
 		);
 
 		foreach($menu as $item) {
 			$link = $this->Html->link(ucfirst($item), array(
-				'controller' => $item
+				'controller' => $item,
+				'action' => 'index'
 			));
 
 			echo $this->Html->tag('li', $link, array(
