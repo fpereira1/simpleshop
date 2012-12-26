@@ -3,22 +3,14 @@
 class CartController extends AppController {
 
 	public function index() {
-		
-		$list = array();
 
-		// We need the product model to load it in the list
-		$this->loadModel('Product');
-
-		foreach($this->Cart->get() as $item) {
-			extract($item);
-			$list[] = array(
-				'quantity' => $quantity,
-				'product' => $this->Product->read(null, $ProductID)
-			);
-		}
-
-		$this->set('list', $list);
+		$this->set('list', $this->Cart->getItems());
+		$this->set('total', $this->Cart->total());
 		$this->set('count', $this->Cart->count());
+
+		if($this->Cart->count() === 0) {
+			$this->render('empty_index');
+		}
 	}
 
 	public function add($id = null) {
@@ -26,7 +18,7 @@ class CartController extends AppController {
 		$data = $this->Cart->get();
 		$data[] = array(
 			'ProductID' => $id,
-			'quantity' => 7
+			'quantity' => 1
 		);
 
 		// Merge stored and new arrays and saves them to the session

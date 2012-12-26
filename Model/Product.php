@@ -44,10 +44,7 @@ class Product extends AppModel {
 		),
 	);
 
-	public function getRealPrice() {
-		$sp = $this->sale_price;
-		$p  = $this->price;
-		return ($sp < $p && $sp > 0) ? $sp : $p;
-	}
-
+	public $virtualFields = array(
+		'display_price' => 'IF(sale_price<price && sale_price>0,sale_price,price)'
+	);
 }

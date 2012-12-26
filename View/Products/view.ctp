@@ -1,14 +1,17 @@
-<div class="hero-unit">
-	<h2><?php echo h($product['Product']['title']); ?></h2>
+<?php extract($product['Product']); ?>
 
-	<p><?php echo h($product['Product']['description']); ?></p>
+<h2><?php echo h($title); ?></h2>
 
-	<?php echo $this->Html->link(__('add to cart'), array(
-		'controller' => 'cart',
-		'action'	=> 'add',
-		$product['Product']['id']
-		), array(
-			'class' => 'btn'
-		));
-	?>
+<p><?php echo h($description); ?></p>
+
+<div class="clearfix">
+	<?php echo $this->Html->image($image); ?>
 </div>
+
+<br />
+
+<?php echo $this->Html->link(__('add to my wishlist'), array(
+	'controller' => 'cart', 'action'=> 'add', $id), array(
+		'class' => 'btn'
+	));
+?>
