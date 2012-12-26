@@ -10,6 +10,7 @@
 		echo $this->Form->input('price');
 		echo $this->Form->input('sale_price');
 		echo $this->Form->input('stock_count');
+		echo $this->Form->input('image');
 	?>
 	</fieldset>
 <?php echo $this->Form->end(__('Submit')); ?>
