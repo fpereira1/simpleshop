@@ -47,4 +47,5 @@ class Product extends AppModel {
 	public $virtualFields = array(
 		'display_price' => 'IF(sale_price<price && sale_price>0,sale_price,price)'
 	);
+
 }

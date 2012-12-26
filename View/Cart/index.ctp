@@ -18,7 +18,7 @@
 	</div>
 <?php endforeach; ?>
 
-<div class="clearfix">
+<div class="actions">
 	<div class="clearfix">
 		<br />
 		<span class="total">The total is: <?php echo $total; ?></span>
