@@ -2,7 +2,7 @@
 
 <h2><?php echo h($title); ?></h2>
 
-<p><?php echo h($description); ?></p>
+<p><?php echo Markdown($description); ?></p>
 
 <div class="clearfix">
 	<?php echo $this->Html->image($image); ?>

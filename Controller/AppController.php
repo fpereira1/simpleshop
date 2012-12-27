@@ -22,6 +22,8 @@
 
 App::uses('Controller', 'Controller');
 
+CakePlugin::load('Markdown');
+
 /**
  * Application Controller
  *

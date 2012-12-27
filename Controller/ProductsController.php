@@ -8,6 +8,8 @@ App::uses('AppController', 'Controller');
  */
 class ProductsController extends AppController {
 
+	var $helpers = array('Markdown.Markdown');
+
 	public function index() {
 		$this->set('products', $this->Product->find('all', array(
 			// 'conditions' => array(
