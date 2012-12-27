@@ -15,10 +15,6 @@ class Cart extends AppModel {
 		CakeSession::write(get_class($this), NULL);
 	}
 
-	public function count() {
-		return count($this->get());
-	}
-
 	public function setItems($data = array()) {
 
 		$session = $this->get();
@@ -61,6 +57,10 @@ class Cart extends AppModel {
 		}
 
 		return $list;
+	}
+
+	public function count() {
+		return count($this->get());
 	}
 
 	public function total() {
