@@ -15,9 +15,8 @@
 			'action' => 'index'
 		));
 
-
 		echo $this->Html->tag('li', $link, array(
-			'class' => ($this->request->controller == $item) ? 'active' : ''
+			'class' => ($this->request->controller == $item) ? 'active' : 'divider-vertical'
 		));
 
 		if($item === 'cart')
