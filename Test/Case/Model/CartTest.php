@@ -20,6 +20,9 @@ class CartTest extends CakeTestCase {
 	public function setUp() {
 		parent::setUp();
 		$this->Cart = ClassRegistry::init('Cart');
+
+		// Destroy the Cart when starting
+		$this->Cart->destroy();
 	}
 
 /**
@@ -28,6 +31,10 @@ class CartTest extends CakeTestCase {
  * @return void
  */
 	public function tearDown() {
+
+		// Destroy when finish the test
+		$this->Cart->destroy();
+
 		unset($this->Cart);
 
 		parent::tearDown();
