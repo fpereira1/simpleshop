@@ -1,6 +1,7 @@
 <?php
 
 App::uses('CakeSession', 'Model/Datasource');
+App::uses('CakeNumber', 'Utility');
 
 class Cart extends AppModel {
 

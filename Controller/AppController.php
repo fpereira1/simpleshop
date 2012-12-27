@@ -39,6 +39,14 @@ class AppController extends Controller {
 		if($this->request->admin === TRUE) {
 			$this->layout = 'admin';
 		}
+
+		// By default these should always be available on views
+		$this->loadModel('Cart');
+		$this->set('CartCount', $this->Cart->count());
+		$this->set('CartTotal', $this->Cart->total());
+
+		// This should be the defalt data for left column
+		$this->set('content_for_leftcolumn', '&nbsp;');
 	}
 
 }

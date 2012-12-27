@@ -1,5 +1,3 @@
-<h2>Products</h2>
-
 <p><?php echo __("Showing 1 to " . count($products) . " of " . count($products) . " items"); ?></p>
 
 <div class="row">
