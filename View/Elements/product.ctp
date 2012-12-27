@@ -1,31 +1,36 @@
-<div class="product span3">
+<div class="product span2">
+	<div class="clearfix">
+		<div class="image">
+			<?php
+				echo $this->Html->image($image, array(
+					'class' => '',
+					'url' => array(
+						'controller' => 'products',
+						'action' => 'view',
+						$id
+					)
+				));
+			?>
+		</div>
 
-	<div class="image">
-		<?php
-			echo $this->Html->image($image, array(
-				'url' => array(
+		<!--
+		<?php if($discount > 0): ?>
+			<span class="label label-important"><?php echo $formatted_discount . ' OFF'; ?></span>
+		<?php endif; ?>
+		-->
+
+		<div class="clear clearfix">
+			<?php
+				echo $this->Html->link(String::truncate($title, 22), array(
 					'controller' => 'products',
 					'action' => 'view',
 					$id
-				)
-			));
-		?>
+				));
+			?>
+		</div>
+		<div class="clear">
+			<span class="price"><?php echo $formatted_display_price; ?></span>
+		</div>
+
 	</div>
-
-	<?php
-		echo $this->Html->link($title, array(
-			'controller' => 'products',
-			'action' => 'view',
-			$id
-		));
-	?>
-
-	<br />
-
-	<?php if($sale_price > 0): ?>
-		<?php echo __('Was'); ?>: <strike><?php echo $price; ?></strike><br />
-		<span class="price"><?php echo __('Now'); ?>: <?php echo h($sale_price); ?></span>
-	<?php else: ?>
-		<span class="price"><?php echo $price; ?></span>
-	<?php endif; ?>
 </div>

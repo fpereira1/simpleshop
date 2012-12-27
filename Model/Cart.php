@@ -69,7 +69,7 @@ class Cart extends AppModel {
 		foreach ($this->getItems() as $i) {
 			$total += $i['quantity'] * $i['price'];
 		}
-		return $total;
+		return CakeNumber::currency($total, Configure::read('Shop.currency'));
 	}
 	
 }

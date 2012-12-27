@@ -21,7 +21,7 @@
 <html lang="en">
 <head>
 	<?php echo $this->Html->charset(); ?>
-	<title><?php echo $title_for_layout; ?></title>
+	<title><?php echo Configure::read('Shop.name') . ' : ' .$title_for_layout; ?></title>
 	<?php
 		echo $this->Html->meta('icon');
 
