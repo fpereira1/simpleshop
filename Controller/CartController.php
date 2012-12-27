@@ -14,20 +14,26 @@ class CartController extends AppController {
 	}
 
 	public function add($id = null) {
-		
-		$data = $this->Cart->get();
-		$data[] = array(
+	
+		$data = array(
 			'ProductID' => $id,
 			'quantity' => 1
 		);
 
 		// Merge stored and new arrays and saves them to the session
-		$this->Cart->set($data);
+		$added = $this->Cart->setItems($data);
 
 		// Redirects users to the products page (where they came from) after adding product to cart
-		$this->Session->setFlash("Product has been added to your cart", 'default', array(
-			'class' => 'alert alert-success'
-		));
+		if($added === true) {
+			$this->Session->setFlash("Product has been added to your cart", 'default', array(
+				'class' => 'alert alert-success'
+			));
+		}
+		else {
+			$this->Session->setFlash("Product is already in your cart", 'default', array(
+				'class' => 'alert alert-error'
+			));
+		}
 
 		$this->redirect(array(
 			'controller' => 'products',

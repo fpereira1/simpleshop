@@ -1,7 +1,6 @@
 <?php
 
 App::uses('Cart', 'Model');
-App::uses('CakeSession', 'Model/Datasource');
 
 /**
  * Cart Test Case
@@ -9,11 +8,10 @@ App::uses('CakeSession', 'Model/Datasource');
  */
 class CartTest extends CakeTestCase {
 
-	public $example_1 = array( 
-		array('ProductID' => 1, 'quantity' => 1),
-		array('ProductID' => 2, 'quantity' => 1)
-	);
-
+	public $example_1 = array('ProductID' => 1, 'quantity' => 1);
+	public $example_2 = array('ProductID' => 2, 'quantity' => 1);
+	public $example_3 = array('ProductID' => 1, 'quantity' => 1);
+		
 /**
  * setUp method
  *
@@ -49,14 +47,19 @@ class CartTest extends CakeTestCase {
  *
  * @return void
  */
-	public function testSet() {
+	public function testSetItems() {
 
-
-		$this->Cart->set($this->example_1);
+		// testing 2 different products
+		$this->Cart->setItems($this->example_1);
+		$this->Cart->setItems($this->example_2);
 		$this->assertEqual(count($this->Cart->get()), 2, "There are 2 products in the shopping cart");
+		$this->Cart->destroy();
 
-//		$this->Cart->destroy();
-
+		// Testing same product
+		$this->Cart->setItems($this->example_1);
+		$this->Cart->setItems($this->example_3);
+		$this->assertEqual(count($this->Cart->get()), 1, "There should be only 1 product in the shopping cart");
+		$this->Cart->destroy();
 
 	}
 
@@ -86,8 +89,8 @@ class CartTest extends CakeTestCase {
 
 	public function testDestroy() {
 
-		$this->Cart->set($this->example_1);
-		$this->assertEqual(count($this->Cart->get()), 2, "There are 2 products in the shopping cart");
+		$this->Cart->setItems($this->example_1);
+		$this->assertEqual(count($this->Cart->get()), 1, "There are 2 products in the shopping cart");
 		$this->Cart->destroy();
 		$this->assertEqual(count($this->Cart->get()), 0, "Cart was destroyed so there should be 0 products in the shopping cart");
 

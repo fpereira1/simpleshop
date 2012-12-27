@@ -1,23 +1,44 @@
 <?php
 
-class Cart extends Object {
+App::uses('CakeSession', 'Model/Datasource');
+
+class Cart extends AppModel {
 
 	public $useTable = false;
 
 	public function get() {
-		return CakeSession::read(get_class($this));
-	}
-
-	public function set($data = array()) {
-		CakeSession::write(get_class($this), $data);
+		$session = CakeSession::read(get_class($this));
+		return is_array($session) ? $session : array();
 	}
 
 	public function destroy() {
-		$this->set(null);
+		CakeSession::write(get_class($this), NULL);
 	}
 
 	public function count() {
 		return count($this->get());
+	}
+
+	public function setItems($data = array()) {
+
+		$session = $this->get();
+
+		// Check if product is already in cart
+		if(is_array($session) && count($session) > 0 && !empty($data['ProductID'])) {
+			foreach ($session as $key => $value) {
+				if($value['ProductID'] == $data['ProductID']) {
+					return false;
+				}
+			}
+		}
+		
+		// Add whats the user input into the session array
+		array_push($session, $data);
+
+		// Saves the data into the cakephp session
+		CakeSession::write(get_class($this), $session);
+
+		return true;
 	}
 
 	public function getItems() {
@@ -33,6 +54,7 @@ class Cart extends Object {
 				$product = $this->Product->read(null, $ProductID);
 				$list[] = array(
 					'quantity' => $quantity,
+					'price' => $product['Product']['display_price'],
 					'product' => $product,
 				);
 			}
@@ -44,7 +66,7 @@ class Cart extends Object {
 	public function total() {
 		$total = 0;
 		foreach ($this->getItems() as $i) {
-			$total += $i['quantity'] * $i['product']['Product']['display_price'];
+			$total += $i['quantity'] * $i['price'];
 		}
 		return $total;
 	}
