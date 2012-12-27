@@ -12,6 +12,10 @@ class Cart extends Object {
 		CakeSession::write(get_class($this), $data);
 	}
 
+	public function destroy() {
+		$this->set(null);
+	}
+
 	public function count() {
 		return count($this->get());
 	}
