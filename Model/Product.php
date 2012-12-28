@@ -50,6 +50,12 @@ class Product extends AppModel {
 		'display_price' => 'IF(sale_price<price && sale_price>0,sale_price,price)'
 	);
 
+	public $_monetaryFields = array(
+		'price',
+		'sale_price',
+		'display_price'
+	);
+
 	public function beforeFind($query) {
 		$fakeRequest = new CakeRequest();
 		// Hack to get it to show hidden products in the backend
@@ -66,20 +72,45 @@ class Product extends AppModel {
 		if(isset($results[0]['Product'])) {
 			foreach ($results as &$item) {
 				$p = $item['Product'];
-				foreach ($item['Product'] as $key => $value) {
-					if(strpos($key, 'price') !== FALSE) {
-						$item['Product']['formatted_' . $key] = CakeNumber::currency($value, Configure::read('Shop.currency'));
-					}
-				}
-				$discount = 0;
-				if($p['sale_price'] > 0) {
-					$discount = (($p['price'] - $p['sale_price']) / $p['price']) * 100;
-				}
-				$item['Product']['discount'] = $discount;
-				$item['Product']['formatted_discount'] = CakeNumber::toPercentage($discount, 0);
+				
+				$discount = $this->_calculateDiscount($p['price'], $p['sale_price']);
+				$monetary = $this->_formatMonetaryFields($p);
+
+				// Merging new data into the current values
+				$item['Product'] = am($p, $discount, $monetary);				
 			}
 		}
 		return $results;
+	}
+
+    /**
+     * Uses the monetaryFields variable and returns an array with formatted
+     * 
+     * @param mixed $Product Description.
+     *
+     * @access private
+     *
+     * @return mixed Value.
+     */
+	public function _formatMonetaryFields($Product) {
+		$out = array();
+		foreach ($this->_monetaryFields as $field) {
+			$out["formatted_{$field}"] = CakeNumber::currency($Product[$field], Configure::read('Shop.currency'));
+		}
+		return $out;
+
+	}
+
+	public function _calculateDiscount($price, $sale_price) {
+		$discount = 0;
+		if($sale_price > 0) {
+			$discount = (($price - $sale_price) / $price) * 100;
+			return array(
+				'discount' => $discount,
+				'formatted_discount' => CakeNumber::toPercentage($discount, 0)
+			);
+		}
+		return array();
 	}
 
 }

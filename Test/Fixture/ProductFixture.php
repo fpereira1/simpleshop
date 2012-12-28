@@ -46,7 +46,7 @@ class ProductFixture extends CakeTestFixture {
 			'hidden' => 0,
 			'title' => 'Polkadot bag',
 			'description' => 'A polkadot bag',
-			'price' => '49.99',
+			'price' => '50',
 			'sale_price' => '10',
 			'stock_count' => '1',
 			'image' => 'http://media-cache-ec5.pinterest.com/upload/94857135870980217_ig4HVSA8_c.jpg'
