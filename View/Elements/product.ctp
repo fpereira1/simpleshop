@@ -7,7 +7,9 @@
 					'url' => array(
 						'controller' => 'products',
 						'action' => 'view',
-						$id
+						$id,
+						Inflector::slug(strtolower($title), '-'),
+
 					)
 				));
 			?>

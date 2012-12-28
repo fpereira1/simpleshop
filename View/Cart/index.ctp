@@ -1,22 +1,35 @@
-<h2><?php echo __('Shopping cart'); ?></h2>
+<p><?php echo __("You have $CartCount items in your cart"); ?>
 
-<p><?php echo __("You have $count items in your cart"); ?>
-
+<table class="table table-striped">
+	<tr>
+		<th>Product</th>
+		<th>Quantity</th>
+		<th>Price</th>
+		<th>Total</th>
+	</tr>
 <?php foreach($list as $item): ?>
 	<?php extract($item['product']['Product']); ?>
-	<div class="row">
-		<div class="span7">
-			<?php echo $this->Html->link($title, array(
-				'controller' => 'products',
-				'action' => 'view',
-				$id
-			)); ?>
-		</div>
-		<div class="span2">
-			<?php echo $item['quantity']; ?> &times; <?php echo number_format($display_price, 2); ?>
-		</div>
-	</div>
+		<tr>
+			<td>
+				<?php echo $this->Html->link($title, array(
+					'controller' => 'products',
+					'action' => 'view',
+					$id
+				)); ?> - 
+				<?php echo $this->Html->link('remove', array(
+					'controller' => 'cart',
+					'action' => 'remove',
+					$id
+				), array(
+					'class' => 'small'
+				)); ?>
+			</td>
+			<td><?php echo $item['quantity']; ?></td>
+			<td><?php echo $formatted_display_price; ?></td>
+			<td><?php echo $display_price * $item['quantity']; ?></td>
+		</tr>
 <?php endforeach; ?>
+</table>
 
 <div class="actions">
 	<div class="clearfix">
@@ -24,9 +37,9 @@
 		<span class="total">The total is: <?php echo $total; ?></span>
 	</div>
 
-	<?php echo $this->Html->link('Go to checkout', array(
+	<?php echo $this->Html->link('Proceed to checkout', array(
 			'controller' => 'checkout'
 		), array(
-			'class' => 'btn'
+			'class' => 'btn btn-primary'
 	)); ?>
 </div>
