@@ -25,14 +25,18 @@
 	<?php
 		echo $this->Html->meta('icon');
 
-		echo $this->Html->css('/bootstrap/css/bootstrap.min.css');
-		echo $this->Html->css('default');
-
-
+		echo $this->Html->css(array(
+			'/bootstrap/css/bootstrap.min.css',
+			'/bootstrap/css/bootstrap-responsive.min.css',
+			'default'
+		));
+		
 		echo $this->fetch('meta');
 		echo $this->fetch('css');
 		echo $this->fetch('script');
 	?>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
 <body class="<?php echo $this->request->controller; ?>">
 	<div class="container">
