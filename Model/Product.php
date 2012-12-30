@@ -79,16 +79,15 @@ class Product extends AppModel {
 
 	public function afterFind($results, $primary = false) {
 		parent::afterFind($results, $primary);
-		if(isset($results[0]['Product'])) {
-			foreach ($results as &$item) {
-				$p = $item['Product'];
-				
-				$discount = $this->_calculateDiscount($p['price'], $p['sale_price']);
-				$monetary = $this->_formatMonetaryFields($p);
+		foreach ($results as &$item) {
+			$p = array_pop($item);
 
-				// Merging new data into the current values
-				$item['Product'] = am($p, $discount, $monetary);				
-			}
+			// Merging new data into the current values
+			$item['Product'] = am(
+				$p,
+				$this->_calculateDiscount($p['price'], $p['sale_price']),
+				$this->_formatMonetaryFields($p)
+			);
 		}
 		return $results;
 	}
@@ -111,6 +110,16 @@ class Product extends AppModel {
 
 	}
 
+    /**
+     * Calculates a discount rate based on difference between sale price and price
+     * 
+     * @param mixed $price      Description.
+     * @param mixed $sale_price Description.
+     *
+     * @access public
+     *
+     * @return mixed Value.
+     */
 	public function _calculateDiscount($price, $sale_price) {
 		$discount = 0;
 		if($sale_price > 0) {
