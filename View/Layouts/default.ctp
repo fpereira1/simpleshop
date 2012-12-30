@@ -64,6 +64,7 @@
 
 	<p>&nbsp;</p>
 	
-	<script src="//code.jquery.com/jquery-latest.js"></script>
+	<script src="//code.jquery.com/jquery-latest.min.js"></script>
+	<?php echo $this->Js->writeBuffer(); // Write cached scripts ?>
 </body>
 </html>
