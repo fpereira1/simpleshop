@@ -1,4 +1,5 @@
-/Config
+/Config/database.php
+/Config/app.php
 /tmp
 /build
 /dist
