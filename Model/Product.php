@@ -56,6 +56,16 @@ class Product extends AppModel {
 		'display_price'
 	);
 
+    /**
+     * Adds data into the find function when searching for a product, only
+     *  active and products in stock is returned 
+     *
+     * @param mixed $query Description.
+     *
+     * @access public
+     *
+     * @return mixed Value.
+     */
 	public function beforeFind($query) {
 		$fakeRequest = new CakeRequest();
 		// Hack to get it to show hidden products in the backend
