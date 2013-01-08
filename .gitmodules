@@ -4,6 +4,3 @@
 [submodule "Plugin/Admin"]
 	path = Plugin/Admin
 	url = git@github.com:fpereira1/Admin.git
-[submodule "Plugin/paypal"]
-	path = Plugin/paypal
-	url = git@github.com:robmcvey/cakephp-paypal.git
