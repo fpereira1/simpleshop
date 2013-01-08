@@ -284,9 +284,3 @@ Configure::write('Shop', array(
 	'slogan' => 'Handmade products made in New Zealand',
 	'currency' => 'NZ$'
 ));
-
-Configure::write('Session', array(
-	'cookie' => Configure::read('Shop.name'),
-));
-
-Configure::dump('app.php', 'default', array('Shop', 'Session'));
