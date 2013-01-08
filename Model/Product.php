@@ -81,13 +81,14 @@ class Product extends AppModel {
 		parent::afterFind($results, $primary);
 		foreach ($results as &$item) {
 			$p = array_pop($item);
-
-			// Merging new data into the current values
-			$item['Product'] = am(
-				$p,
-				$this->_calculateDiscount($p['price'], $p['sale_price']),
-				$this->_formatMonetaryFields($p)
-			);
+			if(isset($p['id'])) { // ensures this is a Product
+				// Merging new data into the current values
+				$item['Product'] = am(
+					$p,
+					$this->_calculateDiscount($p['price'], $p['sale_price']),
+					$this->_formatMonetaryFields($p)
+				);
+			}
 		}
 		return $results;
 	}
@@ -104,7 +105,9 @@ class Product extends AppModel {
 	public function _formatMonetaryFields($Product) {
 		$out = array();
 		foreach ($this->_monetaryFields as $field) {
-			$out["formatted_{$field}"] = CakeNumber::currency($Product[$field], Configure::read('Shop.currency'));
+			if(isset($Product[$field])) {
+				$out["formatted_{$field}"] = CakeNumber::currency($Product[$field], Configure::read('Shop.currency'));
+			}
 		}
 		return $out;
 
