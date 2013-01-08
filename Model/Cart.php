@@ -64,12 +64,17 @@ class Cart extends AppModel {
 		return count($this->get());
 	}
 
-	public function total() {
+	public function totalAsNumeric() {
 		$total = 0;
 		foreach ($this->getItems() as $i) {
 			$total += $i['quantity'] * $i['price'];
 		}
-		return CakeNumber::currency($total, Configure::read('Shop.currency'));
+
+		return $total;
+	}
+
+	public function total() {
+		return CakeNumber::currency($this->totalAsNumeric(), Configure::read('Shop.currency'));
 	}
 	
 }

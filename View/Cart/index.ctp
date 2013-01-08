@@ -38,7 +38,8 @@
 	</div>
 
 	<?php echo $this->Html->link('Proceed to checkout', array(
-			'controller' => 'checkout'
+			'controller' => 'payments',
+			'action' => 'process'
 		), array(
 			'class' => 'btn btn-primary'
 	)); ?>
