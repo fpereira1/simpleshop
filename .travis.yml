@@ -2,12 +2,9 @@ language: php
 
 php:
   - 5.3
-  - 5.4
 
 env:
   - DB=mysql
-  - DB=pgsql
-  - DB=sqlite
 
 script:
-  - ./lib/Cake/Console/cake test core AllTests --stderr
+  - ./Console/cake test Test/Case/AllTest.php  --stderr
