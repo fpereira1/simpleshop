@@ -21,7 +21,7 @@
 			<small><?php echo $stock_count; ?> available.</small>
 		</p>
 		
-		<?php echo $this->Html->link(__('add to my wishlist'), array(
+		<?php echo $this->Html->link(__('buy'), array(
 			'controller' => 'cart', 'action'=> 'add', $id), array(
 				'class' => 'btn btn-primary'
 			));
