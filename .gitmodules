@@ -3,4 +3,4 @@
 	url = git://github.com/Hyra/markdown.git
 [submodule "Plugin/Admin"]
 	path = Plugin/Admin
-	url = git@github.com:fpereira1/Admin.git
+	url = git://github.com/fpereira1/Admin.git
