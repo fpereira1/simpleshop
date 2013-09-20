@@ -1,9 +1,8 @@
-# A simple shop system
+# A simple shop system powered by cakephp
 
 [![Build Status](https://travis-ci.org/fpereira1/simpleshop.png)](undefined)
 
-Where you can add products assign categories, products will be presented in categories
+Yet another simple ecommerce system, where you can add products and categories, products will be presented in categories
 
-* Supports sale price
 * Markdown support
-* Has a backend system
+* Bespoke backend system
